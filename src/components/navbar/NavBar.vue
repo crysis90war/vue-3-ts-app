@@ -30,7 +30,7 @@ import NavItem from "./NavItem.vue";
           style="--bs-scroll-height: 100px"
         >
           <NavItem to="home" label="Home" />
-          <NavItem to="udemy" label="Udemy" />
+          <NavItem to="posts" label="Posts" />
           <NavItem to="about" label="About" />
 
           <li class="nav-item dropdown">

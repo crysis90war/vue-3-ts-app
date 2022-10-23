@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import TrainingView from "../views/TrainingView.vue";
 import LeRepaireDuWebView from "../views/LeRepaireDuWebView.vue";
 import ParentView from "../views/ParentView.vue";
+import NewPostView from "@/views/NewPostView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,12 +14,18 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/udemy",
-      name: "udemy",
+      path: "/posts",
+      name: "posts",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/UdemyView.vue"),
+      component: () => import("../views/PostView.vue"),
+      children: [],
+    },
+    {
+      path: "/posts/new",
+      name: "new-post",
+      component: NewPostView,
     },
     {
       path: "/about",

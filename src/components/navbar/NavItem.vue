@@ -4,6 +4,7 @@ interface Props {
   label: string;
   dropdown?: boolean;
 }
+// eslint-disable-next-line vue/no-setup-props-destructure
 const { to, label, dropdown = false } = defineProps<Props>();
 </script>
 
