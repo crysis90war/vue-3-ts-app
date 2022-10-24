@@ -15,4 +15,6 @@ import NavBar from "./components/navbar/NavBar.vue";
   </div>
 </template>
 
-<style scoped></style>
+<style>
+@import "highlight.js/styles/atom-one-dark.css";
+</style>
