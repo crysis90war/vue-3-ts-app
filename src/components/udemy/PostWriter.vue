@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, watchEffect } from "vue";
 import type { TimelinePost } from "@/models/posts";
+import { useRouter } from "vue-router";
 import { marked } from "marked";
 import highlightjs from "highlight.js";
 import { debounce } from "lodash";
+import { usePosts } from "../../stores/posts";
 
 const props = defineProps<{
   post: TimelinePost;
@@ -13,6 +15,8 @@ const title = ref(props.post.title);
 const content = ref(props.post.markdown);
 const html = ref("");
 const contenteditable = ref<HTMLDivElement>();
+const posts = usePosts();
+const router = useRouter();
 
 /* This is the same as using immediate for watch. Example in watch */
 // watchEffect(() => {
@@ -45,7 +49,7 @@ onMounted(() => {
 
 function parseHtml(markdown: string) {
   marked.parse(
-    content.value,
+    markdown,
     {
       gfm: true,
       breaks: true,
@@ -64,6 +68,17 @@ function handleInput() {
     throw Error("ContentEditable DOM node was not found");
   }
   content.value = contenteditable.value?.innerText;
+}
+
+async function handleClick() {
+  const newPost: TimelinePost = {
+    ...props.post,
+    title: title.value,
+    markdown: content.value,
+    html: html.value,
+  };
+  await posts.createPost(newPost);
+  router.push({ name: "posts" });
 }
 </script>
 
@@ -86,4 +101,14 @@ function handleInput() {
       <div v-html="html" />
     </div>
   </div>
+
+  <div class="d-flex justify-content-end">
+    <div class="btn btn-outline-primary" @click="handleClick">Create Post</div>
+  </div>
 </template>
+
+<style scoped>
+pre {
+  background-color: darkblue !important;
+}
+</style>
