@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import NavItem from "./NavItem.vue";
+import { useModal } from "@/composables/modal";
+
+const modal = useModal();
 </script>
 
 <template>
@@ -56,15 +59,16 @@ import NavItem from "./NavItem.vue";
             <a class="nav-link disabled">Link</a>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <div class="d-flex">
+          <button
+            class="btn btn-success me-2"
+            data-bs-toggle="modal"
+            data-bs-target="#modal"
+          >
+            Sing up
+          </button>
+          <button class="btn btn-outline-secondary ms-2">Log in</button>
+        </div>
       </div>
     </div>
   </nav>
