@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { results, type Result } from "../models/repairweb";
+import { results, type Result } from "@/models/repairweb";
 
 const finalValue = ref<number[]>([]);
 const calculate = (): void => {

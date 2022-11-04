@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import ChildComponent from "../components/parentchild/ChildComponent.vue";
+import ChildComponent from "@/components/parentchild/ChildComponent.vue";
 const my_model = ref<string>();
 </script>
 <template>

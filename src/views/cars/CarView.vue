@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import CarlineList from "../components/cars/CarlineList.vue";
-import { useCars } from "../stores/cars";
+import CarlineList from "../../components/cars/CarlineList.vue";
+import { useCars } from "../../stores/cars";
 const carsStore = useCars();
 </script>
 <template>

@@ -1,10 +1,17 @@
 <script setup lang="ts">
 import NavItem from "./NavItem.vue";
+import { useRouter } from "vue-router";
 import { useUsers } from "@/stores/users";
 import SingupForm from "@/components/udemy/SingupForm.vue";
 import SinginForm from "@/components/udemy/SinginForm.vue";
 
 const usersStore = useUsers();
+const router = useRouter();
+
+async function logout() {
+  await usersStore.logout();
+  router.push({ path: "/" });
+}
 </script>
 
 <template>
@@ -79,10 +86,10 @@ const usersStore = useUsers();
             </button>
           </div>
           <div v-else>
-            <RouterLink class="btn btn-primary me-2" :to="{ name: 'new-post' }">
+            <RouterLink class="btn btn-primary me-2" :to="{ name: 'post-create' }">
               New Post
             </RouterLink>
-            <button class="btn btn-danger ms-2" @click="usersStore.logout()">
+            <button class="btn btn-danger ms-2" @click="logout">
               Sign Out
             </button>
           </div>

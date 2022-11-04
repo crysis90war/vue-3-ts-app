@@ -30,7 +30,11 @@ await postsStore.fetchPosts();
   </ul>
 
   <div class="list-group mt-3 pt-2">
-    <TimelineItem v-for="post of postsStore.filteredPosts" :key="post.id" :post="post" />
+    <TimelineItem
+      v-for="post of postsStore.filteredPosts"
+      :key="post.id"
+      :post="post"
+    />
   </div>
 </template>
 

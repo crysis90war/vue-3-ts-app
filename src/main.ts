@@ -1,14 +1,20 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
+import { useUsers } from "./stores/users";
+import { usePosts } from "./stores/posts";
 
-import App from './App.vue'
-import router from './router'
+import App from "./App.vue";
+import router from "./router";
 
-import './assets/main.css'
+import "./assets/main.css";
 
-const app = createApp(App)
+const app = createApp(App);
+app.use(createPinia());
 
-app.use(createPinia())
-app.use(router)
+const usersStore = useUsers();
+const postsStore = usePosts();
 
-app.mount('#app')
+Promise.all([usersStore.authenticate(), postsStore.fetchPosts()]).then(() => {
+  app.use(router);
+  app.mount("#app");
+});

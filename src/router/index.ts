@@ -1,9 +1,9 @@
+import { useUsers } from "./../stores/users";
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import TrainingView from "../views/TrainingView.vue";
-import LeRepaireDuWebView from "../views/LeRepaireDuWebView.vue";
-import ParentView from "../views/ParentView.vue";
-import NewPostView from "@/views/NewPostView.vue";
+import TrainingView from "../views/trainings/TrainingView.vue";
+import LeRepaireDuWebView from "../views/trainings/LeRepaireDuWebView.vue";
+import ParentView from "../views/trainings/ParentView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,17 +15,37 @@ const router = createRouter({
     },
     {
       path: "/posts",
-      name: "posts",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import("../views/PostView.vue"),
-      children: [],
-    },
-    {
-      path: "/posts/new",
-      name: "new-post",
-      component: NewPostView,
+      component: () => import("@/views/posts/IndexView.vue"),
+      children: [
+        {
+          path: "",
+          name: "posts",
+          component: () => import("@/views/posts/ListView.vue"),
+        },
+        {
+          path: "create",
+          name: "post-create",
+          component: () => import("@/views/posts/CreateView.vue"),
+          beforeEnter: () => {
+            const usersStore = useUsers();
+            if (!usersStore.currentUserId) {
+              return {
+                path: "/",
+              };
+            }
+          },
+        },
+        {
+          path: ":id",
+          name: "post-details",
+          component: () => import("@/views/posts/DetailsView.vue"),
+        },
+        {
+          path: ":id/edit",
+          name: "post-edit",
+          component: () => import("@/views/posts/EditView.vue"),
+        },
+      ],
     },
     {
       path: "/about",
@@ -43,7 +63,7 @@ const router = createRouter({
         {
           path: "cars",
           name: "cars",
-          component: () => import("../views/CarView.vue"),
+          component: () => import("../views/cars/CarView.vue"),
         },
         {
           path: "training",
