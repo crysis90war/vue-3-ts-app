@@ -8,7 +8,6 @@ await postsStore.fetchPosts();
 </script>
 
 <template>
-  <RouterLink class="btn btn-primary" :to="{ name: 'new-post' }"> Create </RouterLink>
   <ul class="nav nav-tabs mt-3">
     <li
       v-for="period of periods"

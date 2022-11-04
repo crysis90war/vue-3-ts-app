@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import NavItem from "./NavItem.vue";
-import { useModal } from "@/composables/modal";
+import { useUsers } from "@/stores/users";
+import SingupForm from "@/components/udemy/SingupForm.vue";
+import SinginForm from "@/components/udemy/SinginForm.vue";
 
-const modal = useModal();
+const usersStore = useUsers();
 </script>
 
 <template>
@@ -60,16 +62,35 @@ const modal = useModal();
           </li>
         </ul>
         <div class="d-flex">
-          <button
-            class="btn btn-success me-2"
-            data-bs-toggle="modal"
-            data-bs-target="#modal"
-          >
-            Sing up
-          </button>
-          <button class="btn btn-outline-secondary ms-2">Log in</button>
+          <div v-if="!usersStore.currentUserId">
+            <button
+              class="btn btn-success me-2"
+              data-bs-toggle="modal"
+              data-bs-target="#singup"
+            >
+              Sing Up
+            </button>
+            <button
+              class="btn btn-outline-secondary ms-2"
+              data-bs-toggle="modal"
+              data-bs-target="#singin"
+            >
+              Sign In
+            </button>
+          </div>
+          <div v-else>
+            <RouterLink class="btn btn-primary me-2" :to="{ name: 'new-post' }">
+              New Post
+            </RouterLink>
+            <button class="btn btn-danger ms-2" @click="usersStore.logout()">
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </nav>
+
+  <SingupForm />
+  <SinginForm />
 </template>

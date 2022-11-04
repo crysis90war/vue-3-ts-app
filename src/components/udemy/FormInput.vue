@@ -3,6 +3,7 @@ import { computed } from "vue";
 import type { Status } from "../../validation";
 interface Prop {
   name: string;
+  id: string;
   modelValue: string;
   status: Status;
   type: string;
@@ -29,12 +30,12 @@ const modalClass = computed(() => {
         :type="type"
         class="form-control"
         :class="modalClass"
-        :id="props.name"
+        :id="props.name + props.id"
         placeholder=""
         :value="modelValue"
         @input="handleInput"
       />
-      <label :for="props.name">{{ props.name }}</label>
+      <label :for="props.name + props.id">{{ props.name }}</label>
     </div>
     <div class="invalid-feedback">{{ status.message }}</div>
     <div class="valid-feedback">Looks good!</div>

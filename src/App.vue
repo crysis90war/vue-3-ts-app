@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import { useModal } from "./composables/modal";
 import NavBar from "./components/navbar/NavBar.vue";
-import SingupForm from "@/components/udemy/SingupForm.vue";
-
-const modal = useModal();
 
 // onMounted(() => {
 //   console.log(document.querySelector("#modal"));
@@ -21,8 +17,6 @@ const modal = useModal();
   <!-- <Teleport to="#modal">
     <SingupForm />
   </Teleport> -->
-
-  <SingupForm />
 
   <div class="container mt-4">
     <RouterView />
