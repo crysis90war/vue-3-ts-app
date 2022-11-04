@@ -37,8 +37,10 @@ const modalClass = computed(() => {
       />
       <label :for="props.name + props.id">{{ props.name }}</label>
     </div>
-    <div class="invalid-feedback">{{ status.message }}</div>
-    <div class="valid-feedback">Looks good!</div>
+    <div v-if="!status.valid" class="invalid-feedback">
+      {{ status.message }}
+    </div>
+    <div v-if="status.valid" class="valid-feedback">Looks good!</div>
   </div>
 </template>
 <style scoped></style>
