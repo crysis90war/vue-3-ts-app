@@ -2,8 +2,6 @@
 import NavItem from "./NavItem.vue";
 import { useRouter } from "vue-router";
 import { useUsers } from "@/stores/users";
-import SingupForm from "@/components/udemy/SingupForm.vue";
-import SinginForm from "@/components/udemy/SinginForm.vue";
 
 const usersStore = useUsers();
 const router = useRouter();
@@ -71,6 +69,7 @@ async function logout() {
         <div class="d-flex">
           <div v-if="!usersStore.currentUserId">
             <button
+              id="sign-up"
               class="btn btn-success me-2"
               data-bs-toggle="modal"
               data-bs-target="#singup"
@@ -78,6 +77,7 @@ async function logout() {
               Sing Up
             </button>
             <button
+              data-testid="sign-in"
               class="btn btn-outline-secondary ms-2"
               data-bs-toggle="modal"
               data-bs-target="#singin"
@@ -86,18 +86,17 @@ async function logout() {
             </button>
           </div>
           <div v-else>
-            <RouterLink class="btn btn-primary me-2" :to="{ name: 'post-create' }">
+            <RouterLink
+              id="new-post"
+              class="btn btn-primary me-2"
+              :to="{ name: 'post-create' }"
+            >
               New Post
             </RouterLink>
-            <button class="btn btn-danger ms-2" @click="logout">
-              Sign Out
-            </button>
+            <button id="sign-out" class="btn btn-danger ms-2" @click="logout">Sign Out</button>
           </div>
         </div>
       </div>
     </div>
   </nav>
-
-  <SingupForm />
-  <SinginForm />
 </template>

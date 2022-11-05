@@ -41,7 +41,6 @@ describe("FormInput", () => {
     expect(wrapper.find(".invalid-feedback").text()).toBe("error");
     await wrapper.find("input").setValue("foobar");
     expect(wrapper.find(".is-invalid").exists()).toBe(false);
-    console.log(wrapper.html());
   });
 
   it("rendes some errors", () => {
